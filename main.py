@@ -1,25 +1,31 @@
 import webapp2
+import random
 
 class Index(webapp2.RequestHandler):
 
-    def getRandomMovie(self):
+    def get_random_movie(self):
 
-        # TODO: make a list with at least 5 movie titles
+        movies = [
+            "The Big Lebowski",
+            "Lord of the Rings: Two Towers",
+            "The Hobbit",
+            "Aladdin",
+            "Star Wars"
+        ]
 
-        # TODO: randomly choose one of the movies, and return it
+        random_movie_index = random.randrange(len(movies))
 
-        return "The Big Lebowski"
+        return movies[random_movie_index]
 
     def get(self):
-        # choose a movie by invoking our new function
-        movie = self.getRandomMovie()
+        movie = self.get_random_movie()
 
-        # build the response string
         content = "<h1>Movie of the Day</h1>"
         content += "<p>" + movie + "</p>"
 
-        # TODO: pick a different random movie, and display it under
-        # the heading "<h1>Tommorrow's Movie</h1>"
+        tomorrow_movie = self.get_random_movie()
+        content += "<h1>Tomrrow's moview</h1>"
+        content += "<p>" + tomorrow_movie + "</p>"
 
         self.response.write(content)
 
